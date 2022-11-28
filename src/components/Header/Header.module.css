@@ -1,0 +1,24 @@
+.headerBlock {
+    background-color: #FCFCFC;
+    min-height: 60px;
+    box-shadow: 0 2px 10px rgba(109, 109, 109, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15%;
+    flex-wrap: wrap;
+}
+
+.personalData {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    border-bottom: 1px dashed;
+}
+
+.avatar {
+    width: 36px;
+    margin-left: 12px;
+}

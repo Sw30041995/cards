@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
-import thunk, {ThunkAction, ThunkDispatch } from "redux-thunk";
+import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AuthActionsType, authReducer} from "../authReducer";
 
 const rootReducer = combineReducers({

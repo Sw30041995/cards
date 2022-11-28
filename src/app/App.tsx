@@ -1,37 +1,46 @@
-import React from 'react';
-import logo from '../assets/logo.svg';
-import avatar from '../assets/avatar.svg';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
 import {Login} from "../components/Login";
 import {Registration} from "../components/Registration";
-import {PasswordRecoveryForm} from "../components/PasswordRecoveryForm";
-import {PasswordRecoveryEmail} from "../components/PasswordRecoveryEmail";
-import {NewPasswordEnteringForm} from "../components/NewPasswordEnteringForm";
+import {PasswordRecovery} from "../components/PasswordRecovery";
+import {PasswordUpdate} from "../components/PasswordUpdate";
 import {Profile} from "../components/Profile";
-
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {checkAuth} from "../authReducer";
+import CircularProgress from '@mui/material/CircularProgress/CircularProgress';
+import {Header} from "../components/Header/Header";
+import {NotFoundPage} from "../components/NotFoundPage/NotFoundPage";
+import {ErrorMessage} from "../ErrorMessage";
+import {SendingLetter} from "../components/SendingLetter";
 
 function App() {
+
+    const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
+
+    useEffect(() => {
+        dispatch(checkAuth())
+    }, [])
+
+    if (!isInitialized) {
+        return <CircularProgress/>
+    }
+
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} alt="logo"/>
-                {/*<Button>Sign in</Button>*/}
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <span style={{borderBottom: '1px dashed'}}>Ivan</span>
-                    <img style={{width: '36px', marginLeft: '12px'}} src={avatar} alt="Avatar"/>
-                </div>
-            </header>
-            <div className='container'>
-                <Routes>
+            <Routes>
+                <Route path='/' element={<Header/>}>
                     <Route path='/' element={<Login/>}/>
-                    <Route path='/registration' element={<Registration/>}/>
-                    <Route path='/password-recovery-form' element={<PasswordRecoveryForm/>}/>
-                    <Route path='/password-recovery-email' element={<PasswordRecoveryEmail/>}/>
-                    <Route path='/new-password-entering-form' element={<NewPasswordEnteringForm/>}/>
-                    <Route path='/profile' element={<Profile/>}/>
-                </Routes>
-            </div>
+                    <Route path='registration' element={<Registration/>}/>
+                    <Route path='password-recovery' element={<PasswordRecovery/>}/>
+                    <Route path='password-update/:token' element={<PasswordUpdate/>}/>
+                    <Route path='password-recovery/sending-letter' element={<SendingLetter/>}/>
+                    <Route path='profile' element={<Profile/>}/>
+                    <Route path='404' element={<NotFoundPage/>}/>
+                </Route>
+            </Routes>
+            <ErrorMessage/>
         </div>
     )
 }
