@@ -1,17 +1,17 @@
 import React, {ChangeEvent, useState} from 'react';
-import edit from "./assets/edit.svg";
+import edit from "../../assets/icons/edit.svg";
 import TextField from "@mui/material/TextField/TextField";
-import {useAppDispatch, useAppSelector} from "./hooks";
-import {UserDataType} from "./cardsAPI";
-import {updateProfileData} from "./authReducer";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {updateProfileData} from "../../reducers/authReducer";
 
 export const EditableSpan = () => {
 
     const dispatch = useAppDispatch()
-    const userData = useAppSelector<UserDataType>(state => state.auth.userData)
+    const userName = useAppSelector(state => state.auth.userData.name)
+    const avatar = useAppSelector(state => state.auth.userData.avatar)
 
     const [editMode, setEditMode] = useState(false)
-    const [name, setName] = useState(userData.name)
+    const [name, setName] = useState(userName)
     const [error, setError] = useState('')
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +28,7 @@ export const EditableSpan = () => {
             return
         }
         setEditMode(false)
-        dispatch(updateProfileData({name, avatar: userData.avatar}))
+        dispatch(updateProfileData({name, avatar}))
     }
 
     return (
@@ -44,8 +44,8 @@ export const EditableSpan = () => {
                     </div>
                 </>
                 : <p className='name'>
-                    {userData.name}
-                    <img style={{position: 'relative', left: '10px', top: '2px', cursor: 'pointer'}}
+                    {userName}
+                    <img title='Click to edit name' style={{position: 'relative', left: '10px', top: '2px', cursor: 'pointer'}}
                          onClick={() => setEditMode(true)} src={edit} alt="Edit"/>
                 </p>}
         </>

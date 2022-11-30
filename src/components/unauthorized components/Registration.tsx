@@ -2,11 +2,13 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {Button} from "../Button";
 import {Link, Navigate} from "react-router-dom";
 import TextField from '@mui/material/TextField/TextField';
-import {register} from "../authReducer";
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {validation} from "../validation";
-import eyeHide from "../assets/eye-hide.svg";
-import eyeShow from "../assets/eye-show.svg";
+import {register} from "../../reducers/authReducer";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {validation} from "../../validation";
+import eyeHide from "../../assets/icons/eye-hide.svg";
+import eyeShow from "../../assets/icons/eye-show.svg";
+import {Title} from "./common/Title";
+import {ClarifyingQuestion} from "./common/ClarifyingQuestion";
 
 type RegistrationErrorsType = RegistrationDataType
 
@@ -19,7 +21,7 @@ type RegistrationDataType = {
 export const Registration = () => {
 
     const dispatch = useAppDispatch()
-    const registrationSuccessful = useAppSelector<boolean>(state => state.auth.registrationSuccessful)
+    const registrationSuccessful = useAppSelector(state => state.auth.registrationSuccessful)
 
     const [registrationData, setRegistrationData] = useState<RegistrationDataType>({
         email: '',
@@ -37,11 +39,19 @@ export const Registration = () => {
     }
     const passwordChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setRegistrationData({...registrationData, password: e.currentTarget.value})
-        setErrors({...errors, password: ''})
+        if (errors.password === 'Passwords do not match') {
+            setErrors({...errors, password: '', confirmPassword: ''})
+        } else {
+            setErrors({...errors, password: ''})
+        }
     }
     const confirmPasswordChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setRegistrationData({...registrationData, confirmPassword: e.currentTarget.value})
-        setErrors({...errors, confirmPassword: ''})
+        if (errors.password === 'Passwords do not match') {
+            setErrors({...errors, password: '', confirmPassword: ''})
+        } else {
+            setErrors({...errors, confirmPassword: ''})
+        }
     }
 
     const {email, password, confirmPassword} = registrationData
@@ -91,7 +101,7 @@ export const Registration = () => {
         <div>
             <div className='container'>
                 <div className='login'>
-                    <h1 className='title'>Sign Up</h1>
+                    <Title>Sign Up</Title>
                     <form style={{width: '100%'}} onSubmit={handleSubmit}>
                         <TextField
                             onBlur={() => validation.emailCheck<RegistrationErrorsType>(setErrors, errors, email)}
@@ -132,7 +142,7 @@ export const Registration = () => {
                         <Button style={{marginTop: '115px'}} type='submit' className='stretch'>Sign Up</Button>
                     </form>
                     <div style={{textAlign: 'center'}}>
-                        <p className='havingAnAccount'>Already have an account?</p>
+                        <ClarifyingQuestion>Already have an account?</ClarifyingQuestion>
                         <Link className='link' to='/'>Sign In</Link>
                     </div>
                 </div>

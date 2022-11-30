@@ -12,13 +12,51 @@
 .personalData {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .name {
     border-bottom: 1px dashed;
+    cursor: pointer;
 }
 
 .avatar {
     width: 36px;
     margin-left: 12px;
+    cursor: pointer;
+}
+
+.profileMenu {
+    width: 122px;
+    height: 104px;
+    background: #FFFFFF;
+    border: 1px solid #CFCFCF;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    position: absolute;
+    top: 50px;
+    left: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2px;
+
+}
+
+.profileMenu:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    border: 5px solid transparent;
+    border-bottom: 5px solid #CFCFCF;
+}
+
+.profileMenu:after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 11px;
+    border: 4px solid transparent;
+    border-bottom: 4px solid #FFFFFF;
 }

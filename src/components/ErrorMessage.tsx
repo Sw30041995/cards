@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "./hooks";
-import {setError} from "./authReducer";
+import {useAppDispatch, useAppSelector} from "../hooks";
+import {setError} from "../reducers/authReducer";
 
 export const ErrorMessage = () => {
 
     const dispatch = useAppDispatch()
-    const error = useAppSelector<string>(state => state.auth.error)
+    const error = useAppSelector(state => state.auth.error)
 
     useEffect(() => {
         let timeoutId = setTimeout(() => {

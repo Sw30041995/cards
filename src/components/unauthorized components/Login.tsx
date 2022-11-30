@@ -2,12 +2,14 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {Button} from "../Button";
 import {Link, Navigate} from "react-router-dom";
 import TextField from '@mui/material/TextField/TextField';
-import {useAppDispatch, useAppSelector} from "../hooks";
-import {login} from "../authReducer";
-import {validation} from "../validation";
-import {LoginDataType} from "../cardsAPI";
-import eyeHide from "../assets/eye-hide.svg";
-import eyeShow from "../assets/eye-show.svg";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {login} from "../../reducers/authReducer";
+import {validation} from "../../validation";
+import {LoginDataType} from "../../api/cardsAPI";
+import eyeHide from "../../assets/icons/eye-hide.svg";
+import eyeShow from "../../assets/icons/eye-show.svg";
+import {Title} from "./common/Title";
+import {ClarifyingQuestion} from "./common/ClarifyingQuestion";
 
 type LoginErrorsType = {
     email: string
@@ -17,7 +19,7 @@ type LoginErrorsType = {
 export const Login = () => {
 
     const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
     const [loginData, setLoginData] = useState<LoginDataType>({email: '', password: '', rememberMe: false})
     const [errors, setErrors] = useState<LoginErrorsType>({} as LoginErrorsType)
@@ -55,16 +57,16 @@ export const Login = () => {
         }
         sendLoginData()
     }
-    
+
     if (isLoggedIn) {
-        return <Navigate to='/profile'/>
+        return <Navigate to={`/pack`}/>
     }
 
     return (
         <div>
             <div className='container'>
                 <div className='login'>
-                    <h1 className='title'>Sign in</h1>
+                    <Title>Sign in</Title>
                     <form style={{width: '100%'}} onSubmit={handleSubmit}>
                         <TextField error={!!errors.email}
                                    onBlur={() => validation.emailCheck(setErrors, errors, loginData.email)}
@@ -82,7 +84,7 @@ export const Login = () => {
                             <img onClick={() => setPasswordHidden(!passwordHidden)}
                                  style={{position: 'absolute', top: '20px', right: '10px', cursor: 'pointer'}}
                                  src={passwordHidden ? eyeShow : eyeHide}
-                                 alt="eye"/>
+                                 alt="Eye"/>
                         </div>
                         <label className='checkboxLabel'>
                             <input onChange={checkboxChangeHandler} checked={loginData.rememberMe} className='checkbox'
@@ -93,7 +95,7 @@ export const Login = () => {
                         <Button type='submit' className='stretch'>Sign In</Button>
                     </form>
                     <div style={{textAlign: 'center'}}>
-                        <p className='havingAnAccount'>Already have an account?</p>
+                        <ClarifyingQuestion>Already have an account?</ClarifyingQuestion>
                         <Link className='link' to='/registration'>Sign Up</Link>
                     </div>
                 </div>

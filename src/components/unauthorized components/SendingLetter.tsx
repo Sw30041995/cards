@@ -1,7 +1,9 @@
 import React from 'react';
 import {Button} from "../Button";
-import letter from '../assets/letter.svg';
+import letter from '../../assets/icons/letter.svg';
 import {useLocation, useNavigate} from "react-router-dom";
+import {Title} from "./common/Title";
+import {ActionInstruction} from "./common/ActionInstruction";
 
 export const SendingLetter = () => {
 
@@ -12,11 +14,11 @@ export const SendingLetter = () => {
         <div>
             <div className='container'>
                 <div className='login passwordRecoveryEmail'>
-                    <h1 className='title'>Check Email</h1>
+                    <Title>Check Email</Title>
                     <img src={letter} alt="Letter"/>
-                    <p className='instructions' style={{textAlign: 'center'}}>
-                        We’ve sent an Email with instructions to {location.state.email}
-                    </p>
+                        <ActionInstruction textPosition>
+                            We’ve sent an Email with instructions to {location.state.email}
+                        </ActionInstruction>
                     <Button onClick={() => navigate('/')} className='stretch'>Back to login</Button>
                 </div>
             </div>

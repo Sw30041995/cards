@@ -8,7 +8,7 @@ const instance = axios.create({
 })
 
 export const authAPI = {
-    register(registrationData: RegistrationDataType) { //тут проверить тип
+    register(registrationData: RegistrationDataType) {
         return instance.post<RegistrationDataType, AxiosResponse<UserDataType>>('auth/register', registrationData)
     },
     login(loginData: LoginDataType) {
@@ -29,6 +29,51 @@ export const authAPI = {
     setNewPassword(newPasswordData: NewPasswordDataType) {
         return instance.post<NewPasswordDataType, AxiosResponse<CommonResponseType>>('auth/set-new-password', newPasswordData)
     }
+}
+
+export const packAPI = {
+    getPacks(page: number) {
+        return instance.get<CardsPacksResponseType>(`cards/pack?pageCount=8&page=${page}`)
+    },
+    createCardsPack(cardsPack: CardsPackRequestType) {
+        return instance.post('cards/pack', cardsPack)
+    }
+}
+
+export type CardsPackRequestType = {
+    name: string
+    deckCover?: string
+    private: boolean
+}
+
+export type CardsPacksResponseType = {
+    cardPacks: CardPackType[]
+    page: number
+    pageCount: number
+    cardPacksTotalCount: number
+    minCardsCount: number
+    maxCardsCount: number
+    token: string
+    tokenDeathTime: number
+}
+
+export type CardPackType = {
+    _id: string
+    user_id: string
+    user_name: string
+    private: boolean
+    name: string
+    path: string
+    grade: number
+    shots: number
+    cardsCount: number
+    type: string
+    rating: number
+    created: string
+    updated: string
+    more_id: string
+    __v: number
+    deckCover: string
 }
 
 export type PasswordUpdateDataType = {

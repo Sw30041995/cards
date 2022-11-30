@@ -7,8 +7,8 @@ import {
     ProfileUpdateDataType,
     RegistrationDataType,
     UserDataType
-} from "./cardsAPI";
-import {AppThunk} from "./app/store";
+} from "../api/cardsAPI";
+import {AppThunk} from "../app/store";
 import {AxiosError} from "axios";
 
 export type AuthActionsType = SetLoginDataType | SetIsLoggedInType | SetIsInitializedType | SetRegistrationStatusType |
@@ -25,7 +25,7 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const authReducer = (state = initialState, action: AuthActionsType): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: AuthActionsType): InitialStateType => {
     switch (action.type) {
         case "AUTH/SET-REGISTRATION-STATUS": {
             return {...state, registrationSuccessful: true}
@@ -98,9 +98,9 @@ export const checkAuth = (): AppThunk => (dispatch) => {
             dispatch(setIsLoggedIn(true))
             dispatch(setLoginData(res.data))
         })
-        .catch((e: AxiosError<ErrorResponseType>) => {
-            dispatch(setError(e.response?.data.error ? e.response.data.error : e.message))
-        })
+        // .catch((e: AxiosError<ErrorResponseType>) => {
+        //     dispatch(setError(e.response?.data.error ? e.response.data.error : e.message))
+        // })
         .finally(() => dispatch(setIsInitialized(true)))
 }
 export const logOut = (): AppThunk => (dispatch) => {

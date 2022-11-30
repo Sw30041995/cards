@@ -93,7 +93,7 @@
     font-size: 14px;
     line-height: 24px;
     font-weight: 600;
-    opacity: 0.5;
+    color: rgba(0,0,0, 0.5);
     margin-bottom: 10px;
 }
 
@@ -103,11 +103,15 @@
     line-height: 24px;
 }
 
-.instructions {
+.instruction {
     font-size: 14px;
     line-height: 24px;
-    opacity: 0.5;
+    color: rgba(0,0,0, 0.5);
     margin-top: 25px;
+}
+
+.centered-text {
+    text-align: center;
 }
 
 .name {
