@@ -32,12 +32,81 @@ export const authAPI = {
 }
 
 export const packAPI = {
-    getPacks(page: number) {
+    getAllPacks(page: number) {
         return instance.get<CardsPacksResponseType>(`cards/pack?pageCount=8&page=${page}`)
     },
+    getMyPacks(userId: string, page: number) {
+        return instance.get<CardsPacksResponseType>(`cards/pack?user_id=${userId}&pageCount=8&page=${page}`)
+    },
     createCardsPack(cardsPack: CardsPackRequestType) {
-        return instance.post('cards/pack', cardsPack)
+        return instance.post<CardsPackRequestType, AxiosResponse<CardPackType>>(`cards/pack`, {cardsPack})
+    },
+    deleteCardsPack(packId: string) {
+        return instance.delete<string>(`cards/pack?id=${packId}`)
+    },
+    updateCardsPackTitle(cardsPack: UpdatePackTitleRequestType) {
+        return instance.put<UpdatePackTitleRequestType>(`cards/pack`, {cardsPack})
     }
+}
+
+export const cardAPI = {
+    getCards(cardsPackId: string, page: number) {
+        return instance.get<CardsResponseType>(`cards/card?cardsPack_id=${cardsPackId}&pageCount=8&page=${page}`)
+    },
+    createNewCard(card: CardRequestType) {
+        return instance.post<CardRequestType>('cards/card', {card})
+    },
+    deleteCard(cardId: string) {
+        return instance.delete(`cards/card?id=${cardId}`)
+    },
+    updateCardData(card: UpdateCardRequestType) {
+        return instance.put('cards/card', {card})
+    }
+}
+
+export type UpdateCardRequestType = {
+    _id: string
+    question?: string
+    answer?: string
+}
+
+export type CardRequestType = {
+    cardsPack_id: string
+    question: string
+    answer: string
+    grade?: number
+    shots?: number
+    answerImg?: string
+    questionImg?: string
+    questionVideo?: string
+    answerVideo?: string
+}
+
+export type UpdatePackTitleRequestType = {
+    _id: string
+    name: string
+}
+
+export type CardsResponseType = {
+    cards: CardType[]
+    cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    page: number
+    pageCount: number
+    packUserId: string
+}
+
+export type CardType = {
+    answer: string
+    question: string
+    cardsPack_id: string
+    grade: number
+    shots: 1
+    user_id: string
+    created: string
+    updated: string
+    _id: string
 }
 
 export type CardsPackRequestType = {

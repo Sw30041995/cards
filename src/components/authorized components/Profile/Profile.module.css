@@ -1,0 +1,46 @@
+.profile {
+    min-height: 360px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    text-align: center;
+}
+
+.avatar {
+    width: 96px;
+    border-radius: 50%;
+}
+
+.editAvatarIcon {
+    position: absolute;
+    top: 65px;
+    right: 0;
+    cursor: pointer;
+}
+
+.editableSpanBlock {
+    width: 100%;
+    position: relative;
+}
+
+.name {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.editNameIcon {
+    position: relative;
+    left: 10px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.email {
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.5);
+}

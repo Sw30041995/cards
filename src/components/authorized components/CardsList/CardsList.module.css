@@ -1,0 +1,45 @@
+.cardsListBlock {
+    margin: 60px 0;
+}
+
+.packMenuIcon {
+    cursor: pointer;
+    position: relative;
+    left: 5px;
+    top: 3px;
+}
+
+.packMenu {
+    width: 116px;
+    height: 136px;
+    background: #FFFFFF;
+    border: 1px solid #CFCFCF;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    position: absolute;
+    top: 40px;
+    left: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.packMenu:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    border: 5px solid transparent;
+    border-bottom: 5px solid #CFCFCF;
+}
+
+.packMenu:after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 11px;
+    border: 4px solid transparent;
+    border-bottom: 4px solid #FFFFFF;
+}

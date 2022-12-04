@@ -1,0 +1,13 @@
+.backArrowBlock {
+    font-size: 14px;
+    position: absolute;
+    top: -45px;
+    cursor: pointer;
+}
+
+.arrowIcon {
+    width: 20px;
+    position: relative;
+    top: 4px;
+    right: 5px;
+}

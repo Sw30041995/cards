@@ -98,9 +98,9 @@ export const checkAuth = (): AppThunk => (dispatch) => {
             dispatch(setIsLoggedIn(true))
             dispatch(setLoginData(res.data))
         })
-        // .catch((e: AxiosError<ErrorResponseType>) => {
-        //     dispatch(setError(e.response?.data.error ? e.response.data.error : e.message))
-        // })
+        .catch((e: AxiosError<ErrorResponseType>) => {
+            // dispatch(setError(e.response?.data.error ? e.response.data.error : e.message))
+        })
         .finally(() => dispatch(setIsInitialized(true)))
 }
 export const logOut = (): AppThunk => (dispatch) => {

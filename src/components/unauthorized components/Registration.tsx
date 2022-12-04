@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {Button} from "../Button";
+import {Button} from "../Button/Button";
 import {Link, Navigate} from "react-router-dom";
 import TextField from '@mui/material/TextField/TextField';
 import {register} from "../../reducers/authReducer";

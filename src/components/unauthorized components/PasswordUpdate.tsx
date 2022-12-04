@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField/TextField';
 import React, {ChangeEvent, useState} from 'react';
 import {Navigate, useParams} from 'react-router-dom';
-import {Button} from "../Button";
+import {Button} from "../Button/Button";
 import {validation} from "../../validation";
 import {setNewPassword} from "../../reducers/authReducer";
 import {useAppDispatch, useAppSelector} from "../../hooks";

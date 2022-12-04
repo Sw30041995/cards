@@ -3,6 +3,9 @@ import edit from "../../assets/icons/edit.svg";
 import TextField from "@mui/material/TextField/TextField";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {updateProfileData} from "../../reducers/authReducer";
+import {Button} from "../Button/Button";
+import buttonStyles from '../Button/Button.module.css'
+import profileStyles from '../authorized components/Profile/Profile.module.css'
 
 export const EditableSpan = () => {
 
@@ -34,18 +37,18 @@ export const EditableSpan = () => {
     return (
         <>
             {editMode ? <>
-                    <div style={{width: '100%', position: 'relative'}}>
+                    <div className={profileStyles.editableSpanBlock}>
                         <TextField error={!!error} value={name} className='textField'
                                    onChange={onChangeHandler} type='text'
                                    label={error ? error : 'Nickname'} variant="standard"/>
-                        <button style={{position: 'absolute', top: '18px', right: '10px'}} className='saveButton'
-                                onClick={updateUserName}>SAVE
-                        </button>
+                        <Button className={buttonStyles.saveButton} onClick={updateUserName}>
+                            SAVE
+                        </Button>
                     </div>
                 </>
-                : <p className='name'>
+                : <p className={profileStyles.name}>
                     {userName}
-                    <img title='Click to edit name' style={{position: 'relative', left: '10px', top: '2px', cursor: 'pointer'}}
+                    <img title='Click to edit name' className={profileStyles.editNameIcon}
                          onClick={() => setEditMode(true)} src={edit} alt="Edit"/>
                 </p>}
         </>

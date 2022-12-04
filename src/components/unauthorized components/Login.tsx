@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {Button} from "../Button";
+import {Button} from "../Button/Button";
 import {Link, Navigate} from "react-router-dom";
 import TextField from '@mui/material/TextField/TextField';
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -74,7 +74,7 @@ export const Login = () => {
                                    value={loginData.email}
                                    className='textField' type='text' label={errors.email ? errors.email : 'Email'}
                                    variant="standard"/>
-                        <div style={{position: 'relative'}}>
+                        <div className='relative'>
                             <TextField error={!!errors.password}
                                        onBlur={() => validation.passwordCheck(setErrors, errors, loginData.password)}
                                        onChange={passwordChangeHandler}

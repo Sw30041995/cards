@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './PackTableHeader.module.css';
+import s from './PacksTableHeader.module.css';
 
-export const PackTableHeader = () => {
+export const PacksTableHeader = () => {
     return (
         <thead className={s.tableHead}>
         <tr className={s.headerCell}>

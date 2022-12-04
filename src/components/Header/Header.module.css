@@ -6,41 +6,52 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 15%;
-    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 500px){
+    .headerBlock {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+    .headerBlock img {
+        margin-bottom: 10px;
+    }
 }
 
 .personalData {
     display: flex;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 .name {
     border-bottom: 1px dashed;
-    cursor: pointer;
 }
 
 .avatar {
     width: 36px;
+    border-radius: 50%;
     margin-left: 12px;
-    cursor: pointer;
 }
 
 .profileMenu {
-    width: 122px;
-    height: 104px;
+    width: 120px;
+    height: 100px;
     background: #FFFFFF;
     border: 1px solid #CFCFCF;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
     position: absolute;
     top: 50px;
-    left: 7px;
+    right: 3px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-evenly;
+    padding-left: 27px;
     border-radius: 2px;
-
+    z-index: 1;
+    cursor: auto;
+    box-sizing: border-box;
 }
 
 .profileMenu:before {
@@ -59,4 +70,10 @@
     right: 11px;
     border: 4px solid transparent;
     border-bottom: 4px solid #FFFFFF;
+}
+
+.icon {
+    position: relative;
+    right: 10px;
+    top: 2px;
 }

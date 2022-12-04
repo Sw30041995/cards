@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from "../Button";
+import {Button} from "../Button/Button";
 import error from '../../assets/icons/error.svg'
 import s from './NotFoundPage.module.css'
 import {Link} from 'react-router-dom';

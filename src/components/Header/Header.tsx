@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import logo from "../../assets/icons/logo.svg";
-import avatar from "../../assets/icons/avatar.svg";
-import {Button} from "../Button";
+import {Button} from "../Button/Button";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {UserDataType} from "../../api/cardsAPI";
-import s from "./Header.module.css";
+import styles from "./Header.module.css";
 import {Outlet, useNavigate} from 'react-router-dom';
 import user from '../../assets/icons/user.svg';
 import logout from '../../assets/icons/logout.svg';
@@ -15,8 +13,13 @@ export const Header = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const userData = useAppSelector<UserDataType>(state => state.auth.userData)
-    const [profileMenuShow, setProfileMenuShow] = useState(false)
+    const userName = useAppSelector(state => state.auth.userData.name)
+    const avatar = useAppSelector(state => state.auth.userData.avatar)
+    const [show, setShow] = useState(false)
+
+    const toggleProfileMenu = () => {
+        setShow(!show)
+    }
 
     const LogOutOfAccount = () => {
         dispatch(logOut())
@@ -24,15 +27,23 @@ export const Header = () => {
 
     return (
         <>
-            <header className={s.headerBlock}>
+            <header className={styles.headerBlock}>
                 <img src={logo} alt="logo"/>
                 {isLoggedIn ? (
-                    <div onMouseOver={() => setProfileMenuShow(true)} className={s.personalData}>
-                        <span className={s.name}>{userData.name}</span>
-                        <img className={s.avatar} src={avatar} alt="Avatar"/>
-                        {profileMenuShow && <div onMouseOut={() => setProfileMenuShow(false)} className={s.profileMenu}>
-                            <p onClick={() => navigate('/profile')} style={{cursor: 'pointer'}}><img src={user} alt="User"/>Profile</p>
-                            <p onClick={LogOutOfAccount} style={{cursor: 'pointer'}}><img src={logout} alt="Logout"/>Log out</p>
+                    <div onClick={toggleProfileMenu} className={styles.personalData}>
+                        <span className={styles.name}>{userName}</span>
+                        <img className={styles.avatar}
+                             src={avatar ? avatar : 'https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png'}
+                             alt="Avatar"/>
+                        {show && <div className={styles.profileMenu}>
+                            <p onClick={() => navigate('/profile')} className='pointer'>
+                                <img className={styles.icon} src={user} alt="User"/>
+                                Profile
+                            </p>
+                            <p onClick={LogOutOfAccount} className='pointer'>
+                                <img className={styles.icon} src={logout} alt="Logout"/>
+                                Log out
+                            </p>
                         </div>}
                     </div>) : <Button onClick={() => navigate('/')}>Sign in</Button>}
             </header>
